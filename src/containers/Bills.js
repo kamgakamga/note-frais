@@ -28,6 +28,8 @@ export default class {
   }
 
   getBills = () => {
+
+    console.log('coucou les petits futé ...');
     if (this.store) {
       return this.store
       .bills()
@@ -52,9 +54,22 @@ export default class {
               }
             }
           })
-          console.log('length', bills.length)
-        return bills
+          console.log('length', bills.length);
+          console.log('length', sortByDateAscending(bills));
+          const antiChrono = (a, b) => ((a < b) ? 1 : -1)
+          const datesSorted = [...bills].sort(antiChrono)
+        return datesSorted;
+        //return sortByDateAscending(bills);
       })
     }
   }
+}
+
+function sortByDateAscending(arr) {
+  arr.sort(function(a, b) {
+    var dateA = new Date(a.date);
+    var dateB = new Date(b.date);
+    return dateA - dateB;
+  });
+  return arr;
 }
